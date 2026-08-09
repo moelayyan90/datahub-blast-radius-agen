@@ -1,0 +1,43 @@
+{
+  "mode": "demo",
+  "urn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,prod.orders,PROD)",
+  "changeType": "rename column",
+  "detail": "customer_id -> customer_key",
+  "column": "customer_id",
+  "risk": {
+    "value": 100,
+    "level": "CRITICAL",
+    "decision": "BLOCK",
+    "critical": 4,
+    "ownerless": 1,
+    "breaking": true,
+    "maxDegree": 3
+  },
+  "reviewSummary": "BLOCK: CRITICAL risk (100/100) — 5 downstream asset(s), 4 governed/critical, 1 ownerless.",
+  "actions": [
+    "Assign ownership to 1 downstream asset(s) before merge.",
+    "Require governance approval for 4 critical / regulated downstream asset(s).",
+    "Block the merge until required approvals and compatibility checks are complete.",
+    "Run the generated contract test against the proposed schema before deployment.",
+    "Notify owners of degree-1 and degree-2 dependencies.",
+    "Persist the review outcome to DataHub so future agents inherit the decision."
+  ],
+  "generatedArtifacts": {
+    "contractTest": "-- ChangeGuard compatibility test\n-- Run during the dual-write migration window before removing customer_id.\nSELECT COUNT(*) AS mismatched_rows\nFROM prod.orders\nWHERE (customer_id <> customer_key)\n   OR (customer_id IS NULL AND customer_key IS NOT NULL)\n   OR (customer_id IS NOT NULL AND customer_key IS NULL);\n-- Expected: mismatched_rows = 0",
+    "policy": {
+      "schemaVersion": 1,
+      "sourceUrn": "urn:li:dataset:(urn:li:dataPlatform:snowflake,prod.orders,PROD)",
+      "decision": "BLOCK",
+      "riskScore": 100,
+      "riskLevel": "CRITICAL",
+      "requiredApprovals": ["governance", "downstream-owners"],
+      "impactedUrns": [
+        "urn:li:dataset:(snowflake,analytics.revenue_daily,PROD)",
+        "urn:li:dashboard:(looker,executive-revenue)",
+        "urn:li:dataset:(snowflake,analytics.customer_ltv,PROD)",
+        "urn:li:dataset:(snowflake,analytics.weekly_growth,PROD)",
+        "urn:li:mlModel:(mlflow,churn-v3)"
+      ]
+    }
+  }
+}
