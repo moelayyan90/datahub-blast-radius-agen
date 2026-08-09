@@ -1,0 +1,15 @@
+{
+  "name": "datahub-changeguard-agent",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vercel dev",
+    "demo": "node dev-server.mjs",
+    "test": "node tests/smoke.mjs && node tests/mcp.mjs",
+    "mcp:analyze": "node mcp/changeguard-agent.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
