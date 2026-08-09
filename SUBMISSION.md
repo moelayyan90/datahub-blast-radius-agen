@@ -1,5 +1,7 @@
 # ChangeGuard — Devpost Submission Pack
 
+> **Submission deadline:** August 10, 2026 at 5:00 PM EDT (approximately August 11, 2026 at 12:00 AM in Jordan).
+
 ## One-line pitch
 
 **ChangeGuard is a pre-merge DataHub agent that calculates the downstream blast radius of destructive data changes and returns an explainable ALLOW / REVIEW / BLOCK decision before production breaks.**
