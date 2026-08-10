@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vercel dev",
     "demo": "node dev-server.mjs",
-    "test": "node tests/smoke.mjs && node tests/mcp.mjs",
+    "test": "node tests/smoke.mjs && node tests/mcp.mjs && node tests/vertex-gemini.mjs",
     "mcp:analyze": "node mcp/changeguard-agent.mjs"
   },
   "engines": {
