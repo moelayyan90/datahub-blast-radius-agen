@@ -6,6 +6,7 @@ import {
   unwrapToolResult,
 } from '../mcp/datahub-mcp-client.mjs';
 
+// Regression coverage for the DataHub MCP integration used by ChangeGuard CI.
 const urn = 'urn:li:dataset:(urn:li:dataPlatform:snowflake,prod.orders,PROD)';
 const downstreamUrn = 'urn:li:dashboard:(looker,orders-dashboard)';
 
